@@ -75,7 +75,6 @@ public class CheckTitleTests {
     public void seleniumdevTitleTest(String title) {
         driver.get("https://www.selenium.dev/documentation/en/webdriver/");
         String actualTitle = driver.getTitle();
-        String expectedTitle = "WebDriver :: Documentation for Selenium";
         assertThat(title, equalTo(actualTitle));
     }
 
