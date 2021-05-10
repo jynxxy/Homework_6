@@ -1,7 +1,12 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class CheckTitleTests {
 
@@ -23,55 +28,55 @@ public class CheckTitleTests {
     }
 
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"Strona główna Rzeszów"})
     @Tag("regresja")
-    @Tag("SiiPortal")
-    public void siiPortalTitleTest() {
+    @Tag("siiportal")
+    public void siiPortalTitleTest(String expectedTitle) {
         driver.get("http://siiportal.sii.pl/");
         String actualTitle = driver.getTitle();
-        String expectedTitle = "Strona główna Rzeszów";
-        Assertions.assertEquals(expectedTitle, actualTitle);
+        assertThat(expectedTitle, equalTo(actualTitle));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"Onet – Jesteś na bieżąco"})
     @Tag("regresja")
-    @Tag("Onet")
-    public void onetTitleTest() {
+    @Tag("onet")
+    public void onetTitleTest(String expectedTitle) {
         driver.get("https://www.onet.pl/");
         String actualTitle = driver.getTitle();
-        String expectedTitle = "Onet – Jesteś na bieżąco";
-        Assertions.assertEquals(expectedTitle, actualTitle);
+        assertThat(expectedTitle, equalTo(actualTitle));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"Kotuszkowo- blog o kotach"})
     @Tag("regresja")
     @Tag("kotuszkowo")
-    public void kotuszkowoTitleTest() {
+    public void kotuszkowoTitleTest(String expectedTitle) {
         driver.get("http://kotuszkowo.pl/");
         String actualTitle = driver.getTitle();
-        String expectedTitle = "Kotuszkowo- blog o kotach";
-        Assertions.assertEquals(expectedTitle, actualTitle);
+        assertThat(expectedTitle, equalTo(actualTitle));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"Filmweb - filmy takie jak Ty!"})
     @Tag("regresja")
     @Tag("filmweb")
-    public void filmwebTitleTest() {
+    public void filmwebTitleTest(String expectedTitle) {
         driver.get("http://filmweb.pl/");
-
         String actualTitle = driver.getTitle();
-        String expectedTitle = "Filmweb - filmy takie jak Ty!";
-        Assertions.assertEquals(expectedTitle, actualTitle);
+        assertThat(expectedTitle, equalTo(actualTitle));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"WebDriver :: Documentation for Selenium"})
     @Tag("regresja")
     @Tag("selenium")
-    public void seleniumdevTitleTest() {
+    public void seleniumdevTitleTest(String title) {
         driver.get("https://www.selenium.dev/documentation/en/webdriver/");
         String actualTitle = driver.getTitle();
         String expectedTitle = "WebDriver :: Documentation for Selenium";
-        Assertions.assertEquals(expectedTitle, actualTitle);
+        assertThat(title, equalTo(actualTitle));
     }
 
 }
